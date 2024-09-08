@@ -1,78 +1,112 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Mobile menu toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    const navMenu = document.querySelector('nav ul');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shanudha Tirosh - Web Developer</title>
+    <link rel="stylesheet" href="modern-portfolio-css.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">ST</div>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
 
-    menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('show');
-    });
+    <main>
+        <section id="home" class="bg-image">
+            <div class="container">
+                <h1>Hello, I'm <span class="highlight">Shanudha Tirosh</span></h1>
+                <p class="tagline">Web Developer | Student at Sri Kalyanathissa College</p>
+                <a href="#contact" class="cta-btn">Get in Touch</a>
+            </div>
+        </section>
 
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('nav a, .cta-btn');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            window.scrollTo({
-                top: targetSection.offsetTop - 70,
-                behavior: 'smooth'
-            });
+        <section id="about">
+            <div class="container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Hi! I am Shanudha Tirosh, a 15-year-old web developer currently studying at Sri Kalyanathissa College. I have a passion for web development and enjoy learning new technologies to create amazing websites.</p>
+                        <a href="#" class="btn">Download CV</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="/api/placeholder/300/300" alt="Shanudha Tirosh" class="profile-image">
+                    </div>
+                    <div class="skills">
+                        <h3>Skills</h3>
+                        <ul>
+                            <li>HTML5</li>
+                            <li>CSS3</li>
+                            <li>JavaScript</li>
+                            <li>React</li>
+                            <li>Node.js</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-            // Close mobile menu after clicking a link
-            navMenu.classList.remove('show');
-        });
-    });
+        <section id="projects" class="bg-image">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project-grid">
+                    <div class="project">
+                        <img src="/api/placeholder/300/200" alt="Project 1">
+                        <h3>Project 1</h3>
+                        <p>A brief description of your project. You can link to a live demo or GitHub repository here.</p>
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                    <div class="project">
+                        <img src="/api/placeholder/300/200" alt="Project 2">
+                        <h3>Project 2</h3>
+                        <p>Another project description goes here.</p>
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                    <div class="project">
+                        <img src="/api/placeholder/300/200" alt="Project 3">
+                        <h3>Project 3</h3>
+                        <p>A third project description to showcase your skills.</p>
+                        <a href="#" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    // Add active class to navigation links on scroll
-    const sections = document.querySelectorAll('section');
+        <section id="contact">
+            <div class="container">
+                <h2>Contact Me</h2>
+                <form id="contact-form">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionHeight = section.clientHeight;
-            if (pageYOffset >= sectionTop) {
-                current = section.getAttribute('id');
-            }
-        });
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Shanudha Tirosh. All rights reserved.</p>
+        </div>
+    </footer>
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').slice(1) === current) {
-                link.classList.add('active');
-            }
-        });
-    });
-
-    // Form submission
-    const contactForm = document.getElementById('contact-form');
-
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        // Here you would typically send the form data to a server
-        // For this example, we'll just log it to the console
-        const formData = new FormData(contactForm);
-        console.log('Form submitted with data:', Object.fromEntries(formData));
-        contactForm.reset();
-        alert('Thank you for your message! I\'ll get back to you soon.');
-    });
-
-    // Simple typing effect for the main heading
-    const heading = document.querySelector('#home h1');
-    const text = heading.innerHTML;
-    heading.innerHTML = '';
-
-    let i = 0;
-    const typeWriter = () => {
-        if (i < text.length) {
-            heading.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 50);
-        }
-    };
-
-    typeWriter();
-});
+    <script src="modern-portfolio-js.js"></script>
+</body>
+</html>
